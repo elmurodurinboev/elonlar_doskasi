@@ -1,0 +1,16 @@
+{
+  "name": "elonlar_doskasi",
+  "version": "1.0.0",
+  "description": "Elonlar doskasi (olx clone)",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "Elonlar",
+    "olx",
+    "clone"
+  ],
+  "author": "Elmurod Urinboev <elmurodorinboyev@gmail.com>",
+  "license": "ISC"
+}
