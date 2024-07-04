@@ -13,11 +13,15 @@ app.set('view engine', '.hbs')
 
 
 app.get("/", (req, res) => {
-  res.render("home")
+  res.render("home", {
+    title: "Home Page"
+  })
 })
 
 app.get("/posters", (req, res) => {
-  res.render("posters")
+  res.render("posters", {
+    title: "Posters Page"
+  })
 })
 
 const PORT = process.env.PORT || 3000
