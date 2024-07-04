@@ -1,10 +1,14 @@
-const { Router } = require("express")
-const router = Router()
+const { Router } = require("express");
+const router = Router();
+const {
+  getPostersPage,
+  getAddPoster,
+  addPoster,
+} = require("../controllers/posterController");
 
-router.get("/", (req, res) => {
-  res.render("posters", {
-    title: "Posters Page"
-  })
-})
+router.get("/", getPostersPage);
 
-module.exports = router
+router.get("/add", getAddPoster);
+router.post("/add", addPoster);
+
+module.exports = router;

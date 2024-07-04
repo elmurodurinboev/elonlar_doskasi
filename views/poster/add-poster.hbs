@@ -1,0 +1,64 @@
+<div class="container mtt">
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="card p-4 mb-5">
+        <form action="/posters/add" method="POST">
+          <div class="mb-3">
+            <label for="title" class="form-label">E'lon sarlavhasi</label>
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Noutbuk Acer"
+              id="email"
+              name="email"
+            />
+          </div>
+          <div class="mb-3">
+            <label for="amount" class="form-label">Narxi (so'mda)</label>
+            <input
+              type="number"
+              class="form-control"
+              placeholder="500 000"
+              id="amount"
+              name="amount"
+            />
+          </div>
+          <div class="mb-3">
+            <label for="region" class="form-label">Hudud</label>
+            <select
+              class="form-select"
+              id="region"
+              aria-label="Default select example"
+              name="region"
+            >
+              <option selected>Hududni tanlang</option>
+              <option value="Toshkent">Toshkent</option>
+              <option value="Qarshi">Qarshi</option>
+              <option value="Buxoro">Buxoro</option>
+              <option value="Navoiy">Navoiy</option>
+              <option value="Andijon">Andijon</option>
+              <option value="Namangan">Namangan</option>
+              <option value="Farg'ona">Farg'ona</option>
+              <option value="Guliston">Guliston</option>
+              <option value="Termiz">Termiz</option>
+              <option value="Samarqand">Samarqand</option>
+              <option value="Xorazm">Xorazm</option>
+              <option value="Nukus">Nukus</option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label for="image" class="form-label">Rasm tanlang</label>
+            <input class="form-control" type="text" id="image" name="image" />
+          </div>
+          <div class="mb-3">
+            <label for="describe" class="form-label">Tarif</label>
+            <textarea name="describe"></textarea>
+          </div>
+          <div class="d-grid gap-2">
+            <button type="submit" class="btn btn-primary">Qo'shish</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
