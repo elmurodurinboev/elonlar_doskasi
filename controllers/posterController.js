@@ -1,3 +1,5 @@
+const { addNewPosterToDb } = require("../db/poster")
+
 // @route   GET /posters
 // @desc    Get all posters
 // @access  public
@@ -17,6 +19,7 @@ const getAddPoster = (req, res) => {
 
 const addPoster = (req, res) => {
   console.log(req.body);
+  addNewPosterToDb({})
 };
 
 module.exports = {
