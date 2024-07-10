@@ -6,5 +6,21 @@
     "region": "Khorezm",
     "image": "assets/elon/elon6.jpg",
     "description": "zo'r noutbuk"
+  },
+  {
+    "id": "d13dd4e0-e1be-4cb2-9f59-fe23b18a1632",
+    "title": "New",
+    "amount": "5000",
+    "region": "Xorazm",
+    "image": "https://rasm.org/pic2.jpg",
+    "description": "tarif"
+  },
+  {
+    "id": "168cf719-f4ee-4dc0-b46a-4d094a16966d",
+    "title": "asdasd",
+    "amount": "123123",
+    "region": "Andijon",
+    "image": "https://rasm.org/pic2.jpg",
+    "description": "asdasdad"
   }
 ]
