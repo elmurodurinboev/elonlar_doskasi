@@ -30,8 +30,20 @@ const getPosterById = async (id) => {
   return poster;
 };
 
+const editPosterById = async (id, editedPoster) => {
+  const data = () => fs.readFileSync(path.join(__dirname, "db.json"), "utf8");
+  let posters = JSON.parse(data());
+  const index = posters.findIndex(p => p.id === id)
+  posters[index] = {
+    id: posters[index].id,
+    ...editedPoster
+  }
+  console.log("Data Edited...")
+}
+
 module.exports = {
   addNewPosterToDb,
   getAllPosters,
   getPosterById,
+  editPosterById
 };

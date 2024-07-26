@@ -2,6 +2,7 @@ const {
   addNewPosterToDb,
   getAllPosters,
   getPosterById,
+  editPosterById
 } = require("../db/poster");
 const { v4 } = require("uuid");
 
@@ -34,11 +35,25 @@ const getOnePoster = async (req, res) => {
 };
 
 const getPosterEditPage = async (req, res) => {
+  const poster = await getPosterById(req.params.id);
   res.render("poster/update", {
     title: "Update page",
+    poster,
     url: process.env.URL,
   });
 };
+
+const updatePosterById = async (req, res) => {
+  const poster = {
+    title: req.body.title,
+    amount: req.body.amount,
+    region: req.body.region,
+    image: req.body.image,
+    description: req.body.description,
+  }
+  await editPosterById(req.params.id, poster)
+  res.redirect("/posters")
+}
 
 const addPoster = async (req, res) => {
   const poster = {
@@ -53,10 +68,12 @@ const addPoster = async (req, res) => {
   res.redirect("/");
 };
 
+
 module.exports = {
   getPostersPage,
   getAddPoster,
   addPoster,
   getOnePoster,
-  getPosterEditPage
+  getPosterEditPage,
+  updatePosterById
 };
