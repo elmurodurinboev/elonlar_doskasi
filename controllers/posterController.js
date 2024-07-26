@@ -33,6 +33,13 @@ const getOnePoster = async (req, res) => {
   });
 };
 
+const getPosterEditPage = async (req, res) => {
+  res.render("poster/update", {
+    title: "Update page",
+    url: process.env.URL,
+  });
+};
+
 const addPoster = async (req, res) => {
   const poster = {
     id: v4(),
@@ -51,4 +58,5 @@ module.exports = {
   getAddPoster,
   addPoster,
   getOnePoster,
+  getPosterEditPage
 };
