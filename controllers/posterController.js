@@ -1,4 +1,8 @@
-const { addNewPosterToDb, getAllPosters } = require("../db/poster");
+const {
+  addNewPosterToDb,
+  getAllPosters,
+  getPosterById,
+} = require("../db/poster");
 const { v4 } = require("uuid");
 
 // @route   GET /posters
@@ -20,6 +24,15 @@ const getAddPoster = (req, res) => {
   });
 };
 
+const getOnePoster = async (req, res) => {
+  const poster = await getPosterById(req.params.id);
+  res.render("poster/one", {
+    title: poster.title,
+    poster,
+    url: process.env.URL,
+  });
+};
+
 const addPoster = async (req, res) => {
   const poster = {
     id: v4(),
@@ -37,4 +50,5 @@ module.exports = {
   getPostersPage,
   getAddPoster,
   addPoster,
+  getOnePoster,
 };
