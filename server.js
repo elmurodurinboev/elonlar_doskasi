@@ -4,7 +4,7 @@ const dotenv = require("dotenv");
 const exphbs = require("express-handlebars");
 const homeRoute = require("./routes/homeRoute");
 const posterRoute = require("./routes/posterRoute");
-
+const { connectToDb } = require("./config/db");
 dotenv.config();
 
 const app = express();
@@ -19,6 +19,8 @@ app.set("view engine", ".hbs");
 
 app.use("/", homeRoute);
 app.use("/posters", posterRoute);
+
+connectToDb();
 
 const PORT = process.env.PORT || 3000;
 
