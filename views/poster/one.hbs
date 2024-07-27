@@ -72,14 +72,15 @@
               >
                 O'zgartirish
               </a>
-              <a
-                href="/posters/{{poster.id}}/delete"
-                type="button"
-                class="btn mt-3 btn-danger"
+              <form
+                action="/posters/{{poster.id}}/delete"
+                method="POST"
+                class="w-100"
               >
-                O'chirish
-              </a>
-
+                <button type="submit" class="btn mt-3 btn-danger w-100">
+                  O'chirish
+                </button>
+              </form>
             </div>
           </div>
         </div>

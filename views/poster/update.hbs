@@ -5,17 +5,34 @@
         <form action="/posters/{{poster.id}}/edit" method="POST">
           <div class="mb-3">
             <label for="title" class="form-label">E'lon sarlavhasi</label>
-            <input type="text" class="form-control" placeholder="Noutbuk Acer" value="{{poster.title}}" id="title"
-              name="title" />
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Noutbuk Acer"
+              value="{{poster.title}}"
+              id="title"
+              name="title"
+            />
           </div>
           <div class="mb-3">
             <label for="amount" class="form-label">Narxi (so'mda)</label>
-            <input type="number" class="form-control" placeholder="500 000" value="{{poster.amount}}" id="amount"
-              name="amount" />
+            <input
+              type="number"
+              class="form-control"
+              placeholder="500 000"
+              value="{{poster.amount}}"
+              id="amount"
+              name="amount"
+            />
           </div>
           <div class="mb-3">
             <label for="region" class="form-label">Hudud</label>
-            <select class="form-select" id="region" aria-label="Default select example" name="region">
+            <select
+              class="form-select"
+              id="region"
+              aria-label="Default select example"
+              name="region"
+            >
               <option selected>Hududni tanlang</option>
               <option value="Toshkent">Toshkent</option>
               <option value="Qarshi">Qarshi</option>
@@ -33,11 +50,17 @@
           </div>
           <div class="mb-3">
             <label for="image" class="form-label">Rasm tanlang</label>
-            <input class="form-control" type="text" id="image" value="{{poster.image}}" name="image" />
+            <input
+              class="form-control"
+              type="text"
+              id="image"
+              value="{{poster.image}}"
+              name="image"
+            />
           </div>
           <div class="mb-3">
             <label for="description" class="form-label">Tarif</label>
-            <textarea name="description">value="{{poster.description}}"</textarea>
+            <textarea name="description">{{poster.description}}</textarea>
           </div>
           <div class="d-grid gap-2">
             <button type="submit" class="btn btn-primary">O'zgartirish</button>

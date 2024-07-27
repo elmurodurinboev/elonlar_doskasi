@@ -33,17 +33,34 @@ const getPosterById = async (id) => {
 const editPosterById = async (id, editedPoster) => {
   const data = () => fs.readFileSync(path.join(__dirname, "db.json"), "utf8");
   let posters = JSON.parse(data());
-  const index = posters.findIndex(p => p.id === id)
+  const index = posters.findIndex((p) => p.id === id);
   posters[index] = {
     id: posters[index].id,
-    ...editedPoster
-  }
-  console.log("Data Edited...")
-}
+    ...editedPoster,
+  };
+  fs.writeFileSync(
+    path.join(__dirname, "db.json"),
+    JSON.stringify(posters),
+    "utf8"
+  );
+  console.log("Data Edited...");
+};
 
+const deleteById = async (id) => {
+  const data = () => fs.readFileSync(path.join(__dirname, "db.json"), "utf8");
+  let posters = JSON.parse(data());
+  posters = posters.filter((p) => p.id !== id);
+  fs.writeFileSync(
+    path.join(__dirname, "db.json"),
+    JSON.stringify(posters),
+    "utf8"
+  );
+  console.log("Data deleted...");
+};
 module.exports = {
   addNewPosterToDb,
   getAllPosters,
   getPosterById,
-  editPosterById
+  editPosterById,
+  deleteById,
 };
