@@ -1,10 +1,4 @@
-const {
-  addNewPosterToDb,
-  getAllPosters,
-  getPosterById,
-  editPosterById,
-  deleteById,
-} = require("../db/poster");
+
 const { v4 } = require("uuid");
 const Poster = require("../models/posterModel");
 
@@ -68,7 +62,7 @@ const updatePosterById = async (req, res) => {
     };
     await Poster.findByIdAndUpdate(req.params.id, poster);
     res.redirect("/posters");
-  } catch (error) {}
+  } catch (error) { }
 };
 
 const addPoster = async (req, res) => {
