@@ -1,5 +1,4 @@
 
-const { v4 } = require("uuid");
 const Poster = require("../models/posterModel");
 
 // @route   GET /posters
