@@ -19,6 +19,7 @@ app.set("view engine", ".hbs");
 
 app.use("/", homeRoute);
 app.use("/posters", posterRoute);
+app.use("/auth", require("./routes/authRoutes"))
 
 connectToDb();
 
