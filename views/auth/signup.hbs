@@ -2,26 +2,55 @@
   <div class="row">
     <div class="col-lg-8 offset-lg-2">
       <div class="card p-4 mb-5">
-        <form>
+        <form action="/auth/signup" method="post">
           <div class="mb-3">
             <label for="email" class="form-label">Email address</label>
-            <input type="email" class="form-control" placeholder="example@mail.com" id="email">
+            <input
+              type="email"
+              class="form-control"
+              placeholder="example@mail.com"
+              id="email"
+              name="email"
+            />
           </div>
           <div class="mb-3">
             <label for="username" class="form-label">Username</label>
-            <input type="text" class="form-control" placeholder="Eshmatov Toshmat" id="username">
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Eshmatov Toshmat"
+              id="username"
+              name="username"
+            />
           </div>
           <div class="mb-3">
             <label for="phone" class="form-label">Phone number</label>
-            <input type="number" class="form-control" placeholder="998911234567" id="phone">
+            <input
+              type="text"
+              class="form-control"
+              placeholder="998911234567"
+              id="phone"
+              value="+998"
+              name="phone"
+            />
           </div>
           <div class="mb-3">
             <label for="password" class="form-label">Password</label>
-            <input type="password" class="form-control" id="password">
+            <input
+              type="password"
+              class="form-control"
+              id="password"
+              name="password"
+            />
           </div>
           <div class="mb-3">
             <label for="password2" class="form-label">Password repeat</label>
-            <input type="password" class="form-control" id="password2">
+            <input
+              type="password"
+              class="form-control"
+              id="password2"
+              name="password2"
+            />
           </div>
           <div class="d-grid gap-2">
             <button type="submit" class="btn btn-primary">Registratsiya</button>
