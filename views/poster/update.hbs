@@ -1,3 +1,5 @@
+<script src="https://cdn.ckeditor.com/4.22.1/standard/ckeditor.js"></script>
+
 <div class="container mtt">
   <div class="row">
     <div class="col-lg-12">
@@ -50,17 +52,14 @@
           </div>
           <div class="mb-3">
             <label for="image" class="form-label">Rasm tanlang</label>
-            <input
-              class="form-control"
-              type="text"
-              id="image"
-              value="{{poster.image}}"
-              name="image"
-            />
+            <input class="form-control" type="file" id="image" name="image" />
           </div>
           <div class="mb-3">
             <label for="description" class="form-label">Tarif</label>
-            <textarea name="description">{{poster.description}}</textarea>
+            <textarea name="description" id="description"></textarea>
+            <script>
+              CKEDITOR.replace( 'description' );
+            </script>
           </div>
           <div class="d-grid gap-2">
             <button type="submit" class="btn btn-primary">O'zgartirish</button>

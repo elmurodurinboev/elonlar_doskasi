@@ -1,4 +1,3 @@
-
 const { v4 } = require("uuid");
 const Poster = require("../models/posterModel");
 
@@ -27,8 +26,11 @@ const getAddPoster = (req, res) => {
 
 const getOnePoster = async (req, res) => {
   try {
-    const poster = await Poster.findById(req.params.id).lean();
-    console.log(poster)
+    const poster = await Poster.findByIdAndUpdate(
+      req.params.id,
+      { $inc: { visits: 1 } },
+      { new: true }
+    ).lean();
     res.render("poster/one", {
       title: poster.title,
       poster,
@@ -63,12 +65,12 @@ const updatePosterById = async (req, res) => {
     };
     await Poster.findByIdAndUpdate(req.params.id, poster);
     res.redirect("/posters");
-  } catch (error) { }
+  } catch (error) {}
 };
 
 const addPoster = async (req, res) => {
   try {
-    console.log(req.file.filename)
+    console.log(req.file.filename);
     const poster = {
       title: req.body.title,
       amount: req.body.amount,

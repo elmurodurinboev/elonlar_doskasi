@@ -1,3 +1,4 @@
+<script src="https://cdn.ckeditor.com/4.22.1/standard/ckeditor.js"></script>
 <div class="container mtt">
   <div class="row">
     <div class="col-lg-12">
@@ -5,15 +6,32 @@
         <form action="/posters/add" method="POST" enctype="multipart/form-data">
           <div class="mb-3">
             <label for="title" class="form-label">E'lon sarlavhasi</label>
-            <input type="text" class="form-control" placeholder="Noutbuk Acer" id="title" name="title" />
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Noutbuk Acer"
+              id="title"
+              name="title"
+            />
           </div>
           <div class="mb-3">
             <label for="amount" class="form-label">Narxi (so'mda)</label>
-            <input type="number" class="form-control" placeholder="500 000" id="amount" name="amount" />
+            <input
+              type="number"
+              class="form-control"
+              placeholder="500 000"
+              id="amount"
+              name="amount"
+            />
           </div>
           <div class="mb-3">
             <label for="region" class="form-label">Hudud</label>
-            <select class="form-select" id="region" aria-label="Default select example" name="region">
+            <select
+              class="form-select"
+              id="region"
+              aria-label="Default select example"
+              name="region"
+            >
               <option selected>Hududni tanlang</option>
               <option value="Toshkent">Toshkent</option>
               <option value="Qarshi">Qarshi</option>
@@ -35,7 +53,10 @@
           </div>
           <div class="mb-3">
             <label for="description" class="form-label">Tarif</label>
-            <textarea name="description"></textarea>
+            <textarea name="description" id="description"></textarea>
+            <script>
+              CKEDITOR.replace( 'description' );
+            </script>
           </div>
           <div class="d-grid gap-2">
             <button type="submit" class="btn btn-primary">Qo'shish</button>
