@@ -1,3 +1,4 @@
+const bcrypt = require("bcryptjs");
 const User = require("../models/userModel");
 // @route   GET /auth/login
 // @desc    Get login page
@@ -22,6 +23,8 @@ const getRegisterPage = (req, res) => {
 const registerNewUser = async (req, res) => {
   try {
     const { email, username, phone, password, password2 } = req.body;
+    const salt = await bcrypt.genSalt(10);
+    const hashedPassword = await bcrypt.hash(password, salt);
     const userExist = await User.findOne({ email });
     if (userExist) {
       return res.redirect("/auth/signup");
@@ -34,10 +37,30 @@ const registerNewUser = async (req, res) => {
       email,
       username,
       phone,
-      password,
+      password: hashedPassword,
     });
 
     res.redirect("/auth/login");
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+const loginUser = async (req, res) => {
+  try {
+    const existUser = await User.findOne({ email: req.body.email });
+    if (existUser) {
+      const isMatchPassword = await bcrypt.compare(
+        req.body.password,
+        existUser.password
+      );
+      if (isMatchPassword) {
+        req.session.user = existUser;
+        req.session.isLogged = true;
+        req.session.save();
+        res.redirect("/profile/" + existUser.username);
+      } else res.redirect("/auth/login");
+    } else res.redirect("/auth/login");
   } catch (error) {
     console.log(error);
   }
@@ -47,4 +70,5 @@ module.exports = {
   getLoginPage,
   getRegisterPage,
   registerNewUser,
+  loginUser,
 };
