@@ -38,6 +38,7 @@ app.set("view engine", ".hbs");
 app.use("/", homeRoute);
 app.use("/posters", posterRoute);
 app.use("/auth", require("./routes/authRoutes"));
+app.use("/profile", require("./routes/profileRoutes"))
 
 const PORT = process.env.PORT || 3000;
 
