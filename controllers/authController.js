@@ -1,3 +1,5 @@
+// Controllerda logic functionlar yoziladi!
+
 const bcrypt = require("bcryptjs");
 const User = require("../models/userModel");
 // @route   GET /auth/login
