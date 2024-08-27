@@ -20,7 +20,10 @@ const useScheme = new Schema({
     type: String,
     required: true,
     minLength: 6
-  }
+  },
+  // Bu yerda ikkita tableni bir biriga ulash ko'rsatilgan
+  // type sidatida Poster schemedagi id ning typini qabul quladi. Ref fegani ulamoqchi bo'lgan tablening nomi
+  posters: [{ type: Schema.Types.ObjectId, ref: "Poster" }]
 },
   {
     timestamps: true

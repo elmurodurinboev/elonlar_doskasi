@@ -1,5 +1,6 @@
 
 const Poster = require("../models/posterModel");
+const User = require("../models/userModel")
 
 // @route   GET /posters
 // @desc    Get all posters
@@ -67,16 +68,29 @@ const updatePosterById = async (req, res) => {
 
 const addPoster = async (req, res) => {
   try {
-    console.log(req.file.filename)
-    const poster = {
+    const newPoster = new Poster({
       title: req.body.title,
       amount: req.body.amount,
       region: req.body.region,
       image: "uploads/" + req.file.filename,
-      description: req.body.description,
-    };
-    Poster.create(poster);
-    res.redirect("/posters");
+      description: req.body.description
+    })
+
+    console.log(req.session.user);
+
+
+    // Bu yerda poster qo'shayotgan userning posters yacheykasiga yangi qo'shilgan posterning idsini push qilish logikasi yozilgan
+    // new: true - degani yangidan yarat degani
+    // upsert: true - agar posters yacheykasi yoq bo'lya uni yarat  degani 
+    await User.findByIdAndUpdate(req.session.user._id, { $push: { posters: newPoster._id } }, { new: true, upsert: true })
+
+    // endi esa bu yaratilgan posterni saqlashimiz kerak bo'ladi
+    newPoster.save((error, savedPoster) => {
+      if (error) throw new error
+      const posterId = savedPoster._id
+      res.redirect("/posters/" + posterId);
+    })
+
   } catch (error) {
     console.log(error);
   }
