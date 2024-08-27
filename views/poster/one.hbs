@@ -54,8 +54,10 @@
               </div>
             </div>
             <a href="#" type="button" class="btn btn-outline-secondary">+998911234567</a>
-            <a href="#" type="button" class="btn mt-3 btn-success">Muallifning
+            {{#if user}}
+            <a href="/profile/{{user.username}}" type="button" class="btn mt-3 btn-success">Muallifning
               boshqa e'lonlari</a>
+            {{/if}}
             <a href="/posters/{{poster._id}}/edit" type="button" class="btn mt-3 btn-warning">
               O'zgartirish
             </a>

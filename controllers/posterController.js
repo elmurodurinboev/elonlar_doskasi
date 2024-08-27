@@ -32,6 +32,7 @@ const getOnePoster = async (req, res) => {
     res.render("poster/one", {
       title: poster.title,
       poster,
+      user: req.session.user,
       url: process.env.URL,
     });
   } catch (error) {
@@ -75,21 +76,15 @@ const addPoster = async (req, res) => {
       image: "uploads/" + req.file.filename,
       description: req.body.description
     })
-
-    console.log(req.session.user);
-
-
     // Bu yerda poster qo'shayotgan userning posters yacheykasiga yangi qo'shilgan posterning idsini push qilish logikasi yozilgan
     // new: true - degani yangidan yarat degani
     // upsert: true - agar posters yacheykasi yoq bo'lya uni yarat  degani 
     await User.findByIdAndUpdate(req.session.user._id, { $push: { posters: newPoster._id } }, { new: true, upsert: true })
 
     // endi esa bu yaratilgan posterni saqlashimiz kerak bo'ladi
-    newPoster.save((error, savedPoster) => {
-      if (error) throw new error
-      const posterId = savedPoster._id
-      res.redirect("/posters/" + posterId);
-    })
+    // Save the new poster and redirect to the poster's page
+    const savedPoster = await newPoster.save();
+    res.redirect("/posters/" + savedPoster._id);
 
   } catch (error) {
     console.log(error);

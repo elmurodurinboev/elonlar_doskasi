@@ -4,6 +4,8 @@ const {
   getProfilePage
 } = require("../controllers/profileController");
 
-router.get("/:username", getProfilePage);
+const { protected } = require("../middleware/auth")
+
+router.get("/:username", protected, getProfilePage);
 
 module.exports = router;
