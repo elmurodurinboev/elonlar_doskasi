@@ -11,6 +11,7 @@ const getPostersPage = async (req, res) => {
     res.render("poster/posters", {
       title: "Posters page",
       posters: posters.reverse(),
+      user: req.session.user,
       url: process.env.URL,
     });
   } catch (error) {
@@ -22,6 +23,7 @@ const getAddPoster = (req, res) => {
   res.render("poster/add-poster", {
     title: "Add poster page",
     url: process.env.URL,
+    user: req.session.user,
   });
 };
 
@@ -41,15 +43,18 @@ const getOnePoster = async (req, res) => {
 };
 
 const getPosterEditPage = async (req, res) => {
-  try {
-    const poster = await Poster.findById(req.params.id).lean();
-    res.render("poster/update", {
-      title: "Update page",
-      poster,
-      url: process.env.URL,
-    });
-  } catch (error) {
-    console.log(error);
+  if (req.session.isLogged) {
+    try {
+      const poster = await Poster.findById(req.params.id).lean();
+      res.render("poster/update", {
+        title: "Update page",
+        poster,
+        url: process.env.URL,
+        user: req.session.user,
+      });
+    } catch (error) {
+      console.log(error);
+    }
   }
 };
 

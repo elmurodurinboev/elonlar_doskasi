@@ -10,13 +10,15 @@ const {
   deletePoster,
 } = require("../controllers/posterController");
 const upload = require("../utils/fileUpload")
+const { protected } = require("../middleware/auth")
 
 router.get("/", getPostersPage);
 
-router.get("/add", getAddPoster);
-router.post("/add", upload.single('image'), addPoster);
-router.get("/:id", getOnePoster);
-router.get("/:id/edit", getPosterEditPage);
-router.post("/:id/edit", updatePosterById);
-router.post("/:id/delete", deletePoster);
+
+router.get("/add", protected, getAddPoster);
+router.post("/add", protected, upload.single('image'), addPoster);
+router.get("/:id", protected, getOnePoster);
+router.get("/:id/edit", protected, getPosterEditPage);
+router.post("/:id/edit", protected, updatePosterById);
+router.post("/:id/delete", protected, deletePoster);
 module.exports = router;
