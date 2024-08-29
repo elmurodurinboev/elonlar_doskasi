@@ -5,6 +5,7 @@ const exphbs = require("express-handlebars");
 const homeRoute = require("./routes/homeRoute");
 const session = require("express-session");
 const MongoDBStore = require("connect-mongodb-session")(session);
+const flash = require("connect-flash");
 const posterRoute = require("./routes/posterRoute");
 const { connectToDb } = require("./config/db");
 dotenv.config();
@@ -32,13 +33,15 @@ app.use(
   })
 );
 
+app.use(flash());
+
 app.engine(".hbs", exphbs.engine({ extname: ".hbs" }));
 app.set("view engine", ".hbs");
 
 app.use("/", homeRoute);
 app.use("/posters", posterRoute);
 app.use("/auth", require("./routes/authRoutes"));
-app.use("/profile", require("./routes/profileRoutes"))
+app.use("/profile", require("./routes/profileRoutes"));
 
 const PORT = process.env.PORT || 3000;
 

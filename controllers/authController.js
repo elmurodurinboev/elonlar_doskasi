@@ -8,6 +8,7 @@ const User = require("../models/userModel");
 const getLoginPage = (req, res) => {
   res.render("auth/login", {
     title: "Login",
+    loginError: req.flash("loginError"),
     url: process.env.URL,
   });
 };
@@ -18,6 +19,7 @@ const getLoginPage = (req, res) => {
 const getRegisterPage = (req, res) => {
   res.render("auth/signup", {
     title: "Registratsiya",
+    regError: req.flash("regError"),
     url: process.env.URL,
   });
 };
@@ -29,9 +31,14 @@ const registerNewUser = async (req, res) => {
     const hashedPassword = await bcrypt.hash(password, salt);
     const userExist = await User.findOne({ email });
     if (userExist) {
+      req.flash(
+        "regError",
+        "Bunday foydalanuvchi allaqachon ro'yhatdan o'tgan"
+      );
       return res.redirect("/auth/signup");
     }
     if (password !== password2) {
+      req.flash("regError", "Parollar mos emas!");
       return res.redirect("/auth/signup");
     }
 
@@ -61,8 +68,14 @@ const loginUser = async (req, res) => {
         req.session.isLogged = true;
         req.session.save();
         res.redirect("/profile/" + existUser.username);
-      } else res.redirect("/auth/login");
-    } else res.redirect("/auth/login");
+      } else {
+        req.flash("loginError", "Bunday ma'lumot topilmadi!");
+        res.redirect("/auth/login");
+      }
+    } else {
+      req.flash("loginError", "Bunday foydalanuvchi mavjud emas!");
+      res.redirect("/auth/login");
+    }
   } catch (error) {
     console.log(error);
   }
@@ -70,13 +83,13 @@ const loginUser = async (req, res) => {
 
 const logout = (req, res) => {
   req.session.destroy();
-  res.redirect("/")
-}
+  res.redirect("/");
+};
 
 module.exports = {
   getLoginPage,
   getRegisterPage,
   registerNewUser,
   loginUser,
-  logout
+  logout,
 };
