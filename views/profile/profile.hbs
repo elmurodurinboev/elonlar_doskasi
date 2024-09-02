@@ -24,13 +24,15 @@
               <hr>
               <div class="d-flex justify-content-between">
                 <p>ID: {{user._id}}</p>
-                <p>E'lonlar soni: 10</p>
+                <p>E'lonlar soni: {{posters.length}}</p>
               </div>
               {{/if}}
             </div>
           </div>
         </div>
+        {{#if isMe}}
         <a href="/profile/change" class="btn mt-3 btn-success">O'zgartirish</a>
+        {{/if}}
       </div>
     </div>
   </div>

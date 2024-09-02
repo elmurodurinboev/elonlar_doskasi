@@ -29,12 +29,17 @@ const getAddPoster = (req, res) => {
 
 const getOnePoster = async (req, res) => {
   try {
-    const poster = await Poster.findById(req.params.id).lean();
+    const poster = await Poster.findById(req.params.id)
+      .populate("author")
+      .lean();
+
+    console.log(poster.author)
     console.log(poster)
     res.render("poster/one", {
       title: poster.title,
       poster,
       user: req.session.user,
+      author: poster.author,
       url: process.env.URL,
     });
   } catch (error) {
@@ -79,7 +84,8 @@ const addPoster = async (req, res) => {
       amount: req.body.amount,
       region: req.body.region,
       image: "uploads/" + req.file.filename,
-      description: req.body.description
+      description: req.body.description,
+      author: req.session.user._id
     })
     // Bu yerda poster qo'shayotgan userning posters yacheykasiga yangi qo'shilgan posterning idsini push qilish logikasi yozilgan
     // new: true - degani yangidan yarat degani
