@@ -4,6 +4,8 @@ const dotenv = require("dotenv");
 const exphbs = require("express-handlebars");
 const homeRoute = require("./routes/homeRoute");
 const session = require("express-session");
+const Handlebars = require("handlebars")
+const helper = require("./utils/hbsHelper")
 const MongoDBStore = require("connect-mongodb-session")(session);
 const flash = require("connect-flash");
 const posterRoute = require("./routes/posterRoute");
@@ -18,6 +20,7 @@ const store = new MongoDBStore({
   uri: process.env.MONGO_URI,
   collection: "session",
 });
+
 
 // Body parser
 app.use(express.urlencoded({ extended: false }));
@@ -34,6 +37,9 @@ app.use(
 );
 
 app.use(flash());
+
+helper(Handlebars)
+
 
 app.engine(".hbs", exphbs.engine({ extname: ".hbs" }));
 app.set("view engine", ".hbs");

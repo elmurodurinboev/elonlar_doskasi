@@ -6,19 +6,19 @@ const User = require("../models/userModel")
 
 const getProfilePage = async (req, res) => {
   try {
-    const user = await User
+    const profileUser = await User
       .findOne({ username: req.params.username })
       .populate("posters")
       .lean();
 
-    const isMe = user._id == req.session.user._id.toString()
+    const isMe = profileUser._id == req.session.user._id.toString()
 
     res.render("profile/profile", {
-      title: `${user.username}`,
-      user,
+      title: `${profileUser.username}`,
+      profileUser,
       isMe,
-      myPoster: req.session.user.username,
-      posters: user.posters,
+      user: req.session.user,
+      posters: profileUser.posters,
       isAuth: req.session.isLogged,
       url: process.env.URL,
     });
