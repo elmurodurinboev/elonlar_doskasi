@@ -37,4 +37,29 @@ const posterScheme = new Schema({
   }
 });
 
+// Indexes
+
+posterScheme.indexes({
+  title: "text",
+  description: "text"
+})
+
+
+// Modify the static methods to return a promise
+posterScheme.statics = {
+  searchPartial: function (q) {
+    return this.find({
+      $or: [
+        { "title": new RegExp(q, 'gi') },
+        { "description": new RegExp(q, 'gi') }
+      ]
+    });
+  },
+  searchFull: function (q) {
+    return this.find({
+      $text: { $search: q, $caseSensitive: false }
+    });
+  }
+}
+
 module.exports = model("Poster", posterScheme);

@@ -1,12 +1,44 @@
 
 const Poster = require("../models/posterModel");
 const User = require("../models/userModel")
+const filtering = require("../utils/filtering")
 
 // @route   GET /posters
 // @desc    Get all posters
 // @access  public
 const getPostersPage = async (req, res) => {
   try {
+    if (req.query.search && req.query.search.trim() !== '') {
+      const { search } = req.query
+
+      const posters = await Poster.searchPartial(search).lean()
+      console.log(posters);
+
+
+      return res.status(200).render("poster/search-results", {
+        title: "Search results",
+        posters: posters.reverse(),
+        searchQuery: search,
+        user: req.session.user,
+        url: process.env.URL,
+      })
+    }
+
+    if (Object.keys(req.query).length > 0) {
+      const { category, from, to, region } = req.query
+      // $gte $lte $gt $lt
+      const filterings = filtering(category, from, to, region)
+      const posters = await Poster.find(filterings).lean()
+
+      return res.render('poster/search-results', {
+        title: 'Filter results',
+        posters: posters.reverse(),
+        user: req.session.user,
+        querySearch: req.query.search,
+        url: process.env.URL
+      })
+    }
+
     const posters = await Poster.find().lean();
     res.render("poster/posters", {
       title: "Posters page",
